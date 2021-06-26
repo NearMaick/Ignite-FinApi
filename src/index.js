@@ -82,6 +82,14 @@ app.get('/account', verifyExistsAccountCPF, (request, response) => {
   return response.json(customer);
 });
 
+app.get('/balance', verifyExistsAccountCPF, (request, response) => {
+  const { customer } = request;
+
+  const balance = getBalance(customer.statement);
+
+  return response.json(balance);
+});
+
 app.post('/deposit', verifyExistsAccountCPF, (request, response) => {
   const { description, amount } = request.body;
 
